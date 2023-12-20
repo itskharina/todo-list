@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">    
+    <title>To-Do List</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>to do list</h1>
+            <button class="add-btn">+ Add new task</button>
+        </header>
+        <nav class="nav">
+            <div class="tasks">
+                <button>All</button>
+                <button>Today</button>
+                <button>This Week</button>
+            </div>
+            <div class="projects">
+                <h2>Projects</h2>
+                <button>New project</button>
+            </div>
+        </nav>
+        <main class="main">
+            <div class="task-popup hidden">
+                <form class="form">
+                    <div class="form-container">
+                        <div class="top">
+                            <h3>Add your task!</h3>
+                            <button class="remove-btn">X</button>
+                        </div>
+                        <div class="tasks">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" autocomplete="off">
+                            <label for="description">Description </label>
+                            <textarea name="description" id="description"></textarea>
+                            <label for="date">Due Date</label>
+                            <input type="date" id="date">
+                            <button type="submit" class="submit-btn">Add task</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+        <div class="task-display"></div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

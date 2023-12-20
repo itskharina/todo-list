@@ -1,0 +1,1 @@
+(()=>{"use strict";(()=>{document.querySelector(".add-btn").addEventListener("click",(function(){e.classList.remove("hidden")})),document.querySelector(".remove-btn").addEventListener("click",(function(){e.classList.add("hidden")}));const e=document.querySelector(".task-popup")})()})();

@@ -1,0 +1,173 @@
+$firstColour: #f1eef7; 
+$secondColour: #d1cde6;
+$thirdColour: #8b93cf;
+$fourthColour: #59556d;
+
+@mixin flex($direction) {
+	display: flex;
+    flex-direction: $direction;
+	align-items: center;
+	justify-content: center;
+}
+
+@mixin button {
+    border: 0;
+    background-color: $firstColour;  
+    padding: 10px;
+    border-radius: 8px;
+    color: black;
+    font-size: 16px;
+    width: 160px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 6fr;
+    grid-template-areas: 
+    "header header header"
+    "nav main main"
+    "nav main main"
+    "nav main main";
+    height: 100vh;
+}
+
+button:active {
+    transform: translateY(4px);
+}
+
+
+//HEADER
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    grid-area: header;
+    color: white;
+    background-color: $fourthColour;
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    button {
+        @include button;
+    }
+}
+
+//NAV
+nav {
+    grid-area: nav;
+    background-color: $secondColour;
+}
+
+
+//MAIN
+.main {
+    grid-area: main;
+    background-color: $firstColour;
+}
+
+.hidden {
+    display: none;
+}
+
+.task-popup {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.form-container {
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 500px;
+    height: 400px;
+    background-color: $firstColour;
+    color: $fourthColour;
+    padding: 5px;
+
+    .tasks {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 0 25px;
+    }
+    
+    h3 {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin: 8px 0px 8px 150px;
+        @include flex(row)
+    }
+    
+    label {
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    .submit-btn {
+        @include button;
+        margin: 15px auto;
+    }
+
+    .top {
+        @include flex(row);
+        gap: 7rem;
+    }
+
+    .remove-btn {
+        border: 1px solid $secondColour;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        font-size: 1.1rem;
+        background-color: $secondColour;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        color: $fourthColour;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    input, textarea {
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        background-color: $secondColour;
+        width: 100%;
+        padding: 5px 10px;
+        resize: none;
+        font-size: 0.9rem;
+    
+        #description {
+            height: 4rem;
+        }
+
+        #title {
+            height: 2rem;
+        }
+
+        #date {
+            height: 2rem;
+            font-size: 1rem;
+        }
+    }
+}
