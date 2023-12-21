@@ -13,26 +13,26 @@
     <div class="container">
         <header class="header">
             <h1>to do list</h1>
-            <button class="add-btn">+ Add new task</button>
+            <button class="add-task">+ Add new task</button>
         </header>
         <nav class="nav">
-            <div class="tasks">
-                <button>All</button>
-                <button>Today</button>
-                <button>This Week</button>
+            <div class="buttons">
+                <button class="all"><i class="fa-solid fa-inbox" aria-hidden="true"></i> All</button>
+                <button><i class="fa-solid fa-calendar-day" aria-hidden="true"></i>Today</button>
+                <button><i class="fa-solid fa-calendar-week" aria-hidden="true"></i>This Week</button>
             </div>
             <div class="projects">
                 <h2>Projects</h2>
-                <button>New project</button>
+                <button class="add-project"><i class="fa-solid fa-plus" aria-hidden="true"></i>Create new project</button>
             </div>
         </nav>
         <main class="main">
             <div class="task-popup hidden">
                 <form class="form">
-                    <div class="form-container">
+                    <div class="tasks-container">
                         <div class="top">
                             <h3>Add your task!</h3>
-                            <button class="remove-btn">X</button>
+                            <button class="remove-task">X</button>
                         </div>
                         <div class="tasks">
                             <label for="title">Title</label>
@@ -46,9 +46,26 @@
                     </div>
                 </form>
             </div>
+
+            <div class="project-popup hidden">
+                <form class="form">
+                    <div class="project-container">
+                        <div class="top">
+                            <h3>Add your project!</h3>
+                            <button class="remove-project">X</button>
+                        </div>
+                        <div class="project-input">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" autocomplete="off">
+                            <button type="submit" class="submit-btn center" >Add project</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </main>
         <div class="task-display"></div>
     </div>
+    <script src="https://kit.fontawesome.com/f9007cbfa6.js" crossorigin="anonymous"></script>
     <script src="main.js"></script>
 </body>
 </html>
