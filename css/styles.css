@@ -7,14 +7,10 @@
 
 .container {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 6fr;
   grid-template-rows: 1fr 6fr;
   grid-template-areas: "header header header" "nav main main" "nav main main" "nav main main";
   height: 100vh;
-}
-
-button:active {
-  transform: translateY(4px);
 }
 
 .header {
@@ -35,15 +31,53 @@ button:active {
   border-radius: 8px;
   color: black;
   font-size: 16px;
-  width: 160px;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   cursor: pointer;
+  width: 160px;
+}
+.header button:active {
+  transform: translateY(4px);
 }
 
 nav {
   grid-area: nav;
   background-color: #d1cde6;
+  display: flex;
+  flex-direction: column;
+}
+nav .buttons, nav .projects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+nav .projects {
+  margin-top: 40px;
+}
+nav .fa-solid {
+  margin-right: 10px;
+}
+nav button {
+  border: 0;
+  height: 2.7rem;
+  width: 250px;
+  padding: 10px;
+  border-radius: 8px;
+  color: #59556d;
+  font-size: 16px;
+  text-align: start;
+  cursor: pointer;
+  background-color: #d1cde6;
+  font-size: 1.1rem;
+}
+nav button:hover {
+  background-color: #ccc7e4;
+}
+nav button:active, nav button:focus {
+  background-color: #ccc7e4;
+  font-weight: 600;
 }
 
 .main {
@@ -55,35 +89,24 @@ nav {
   display: none;
 }
 
-.task-popup {
+.task-popup, .project-popup {
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
-.form-container {
-  border-radius: 10px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 500px;
-  height: 400px;
-  background-color: #f1eef7;
-  color: #59556d;
-  padding: 5px;
-}
-.form-container .tasks {
+.top {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 0 25px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 7rem;
 }
-.form-container h3 {
+
+h3 {
   font-size: 1.5rem;
   font-weight: 500;
   margin: 8px 0px 8px 150px;
@@ -92,31 +115,70 @@ nav {
   align-items: center;
   justify-content: center;
 }
-.form-container label {
+
+label {
   font-size: 1.1rem;
   font-weight: 500;
 }
-.form-container .submit-btn {
+
+input, textarea {
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  background-color: #d1cde6;
+  width: 100%;
+  padding: 5px 10px;
+  resize: none;
+  font-size: 0.9rem;
+}
+input #description, textarea #description {
+  height: 4rem;
+}
+input #title, input #date, textarea #title, textarea #date {
+  height: 2rem;
+}
+input #date, textarea #date {
+  font-size: 1rem;
+}
+
+#name {
+  height: 2.2rem;
+  margin-top: 6px;
+}
+
+.submit-btn {
   border: 0;
   background-color: #f1eef7;
   padding: 10px;
   border-radius: 8px;
   color: black;
   font-size: 16px;
-  width: 160px;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   cursor: pointer;
   margin: 15px auto;
-}
-.form-container .top {
+  width: 160px;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 7rem;
 }
-.form-container .remove-btn {
+.submit-btn:active {
+  transform: translateY(4px);
+}
+
+.project-container {
+  border-radius: 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 500px;
+  height: 230px;
+  background-color: #f1eef7;
+  color: #59556d;
+  padding: 0 25px;
+}
+.project-container .remove-project {
   border: 1px solid #d1cde6;
   border-radius: 50%;
   width: 30px;
@@ -128,23 +190,47 @@ nav {
   font-weight: 500;
   cursor: pointer;
 }
-.form-container input, .form-container textarea {
-  border: none;
+.project-container .remove-project:active {
+  transform: translateY(4px);
+}
+.project-container .project-input {
+  margin-top: 20px;
+}
+.project-container .center {
+  margin-top: 23px;
+}
+
+.tasks-container {
   border-radius: 10px;
-  outline: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 500px;
+  height: 400px;
+  background-color: #f1eef7;
+  color: #59556d;
+  padding: 5px;
+}
+.tasks-container .tasks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0 25px;
+}
+.tasks-container .remove-task {
+  border: 1px solid #d1cde6;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1.1rem;
   background-color: #d1cde6;
-  width: 100%;
-  padding: 5px 10px;
-  resize: none;
-  font-size: 0.9rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: #59556d;
+  font-weight: 500;
+  cursor: pointer;
 }
-.form-container input #description, .form-container textarea #description {
-  height: 4rem;
-}
-.form-container input #title, .form-container textarea #title {
-  height: 2rem;
-}
-.form-container input #date, .form-container textarea #date {
-  height: 2rem;
-  font-size: 1rem;
+.tasks-container .remove-task:active {
+  transform: translateY(4px);
 }/*# sourceMappingURL=styles.css.map */

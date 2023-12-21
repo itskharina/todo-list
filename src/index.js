@@ -7,6 +7,8 @@
 // fake tasks
 // sidebar
 
-import { createEventListeners } from './todo';
+import { createTodoModal } from './createtodo';
+import { createProjectModal } from './createProject';
 
-createEventListeners();
+createTodoModal();
+createProjectModal();
