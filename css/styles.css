@@ -116,7 +116,7 @@ h3 {
   justify-content: center;
 }
 
-label {
+label, .tasks-container .tasks p {
   font-size: 1.1rem;
   font-weight: 500;
 }
@@ -207,7 +207,7 @@ input #date, textarea #date {
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 500px;
-  height: 400px;
+  height: 470px;
   background-color: #f1eef7;
   color: #59556d;
   padding: 5px;
@@ -218,6 +218,26 @@ input #date, textarea #date {
   align-items: flex-start;
   gap: 10px;
   padding: 0 25px;
+}
+.tasks-container .tasks .radio-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+.tasks-container .tasks .radio-buttons img {
+  width: 30px;
+}
+.tasks-container .tasks .low, .tasks-container .tasks .medium, .tasks-container .tasks .high {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.tasks-container .tasks p {
+  margin-top: 8px;
 }
 .tasks-container .remove-task {
   border: 1px solid #d1cde6;

@@ -235,7 +235,7 @@ input, textarea {
     left: 50%;
     transform: translate(-50%, -50%);
     min-width: 500px;
-    height: 400px;
+    height: 470px;
     background-color: $firstColour;
     color: $fourthColour;
     padding: 5px;
@@ -246,6 +246,25 @@ input, textarea {
         align-items: flex-start;
         gap: 10px;
         padding: 0 25px;
+
+        .radio-buttons {
+            @include flex(row);
+            gap: 50px;
+
+            img {
+                width: 30px;
+            }
+        }
+
+        .low, .medium, .high {
+            @include flex(row);
+            gap: 10px;
+        }
+        
+        p {
+            @extend label;
+            margin-top: 8px;
+        }
     }
         
     .remove-task {
