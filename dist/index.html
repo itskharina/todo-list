@@ -41,7 +41,22 @@
                             <textarea name="description" id="description"></textarea>
                             <label for="date">Due Date</label>
                             <input type="date" id="date">
-                            <button type="submit" class="submit-btn">Add task</button>
+                            <p>Priority</p>
+                            <div class="radio-buttons">
+                                <div class="low">
+                                    <input type="radio" id="low" name="priority" value="low">
+                                    <label for="low"><img alt="green flag" src="../images/greenflag.png"></label>
+                                </div>
+                                <div class="medium">
+                                    <input type="radio" id="medium" name="priority" value="medium">
+                                    <label for="medium"><img alt="orange flag" src="../images/orangeflag.png"></label>
+                                </div>
+                                <div class="high">
+                                    <input type="radio" id="high" name="priority" value="high">
+                                    <label for="high"><img alt="red flag" src="../images/redflag.png"></label>
+                                </div>
+                            </div>
+                            <button type="submit" class="submit-btn" id="submit-task" >Add task</button>
                         </div>
                     </div>
                 </form>
@@ -57,7 +72,7 @@
                         <div class="project-input">
                             <label for="name">Name</label>
                             <input type="text" id="name" autocomplete="off">
-                            <button type="submit" class="submit-btn center" >Add project</button>
+                            <button type="submit" class="submit-btn center" id="submit-project" >Add project</button>
                         </div>
                     </div>
                 </form>
