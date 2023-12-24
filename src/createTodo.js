@@ -14,16 +14,19 @@ const createTodoModal = () => {
   function closeTask() {
     modal.classList.add('hidden');
   }
-};
 
-const submitPressed = () => {
-  const submitBtn = document.querySelector('.submit-btn');
-  submitBtn.addEventListener('click', (e) => {
-    hasSubmit = true;
-    e.preventDefault();
-    form.reset();
-    openCard();
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeTask();
+    }
   });
 };
 
-export { createTodoModal, submitPressed };
+// const submitPressed = () => {
+//   const submitBtn = document.querySelector('.submit-btn');
+//   submitBtn.addEventListener('click', () => {
+//  add code that adds the stuff inputted into an array or smth
+//  });
+// };
+
+export { createTodoModal };

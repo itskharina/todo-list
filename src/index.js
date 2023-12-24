@@ -2,13 +2,14 @@
 // adding items
 // setting todo as complete
 // localstorage
-// projects
-// changing priorities
+// editing tasks
 // fake tasks
 // sidebar
 
 import { createTodoModal } from './createtodo';
 import { createProjectModal } from './createProject';
+import { renderTasks } from './dom';
 
 createTodoModal();
 createProjectModal();
+renderTasks();

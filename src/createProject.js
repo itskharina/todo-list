@@ -1,22 +1,25 @@
 import { from } from 'webpack-sources/lib/compatsource';
-import { submitPressed } from './createtodo';
 
 export const createProjectModal = () => {
   const addProject = document.querySelector('.add-project');
-  addProject.addEventListener('click', openCard);
+  addProject.addEventListener('click', openProject);
 
   const removeProject = document.querySelector('.remove-project');
-  removeProject.addEventListener('click', closeCard);
+  removeProject.addEventListener('click', closeProject);
 
   const modal = document.querySelector('.project-popup');
 
-  function openCard() {
+  function openProject() {
     modal.classList.remove('hidden');
   }
 
-  function closeCard() {
+  function closeProject() {
     modal.classList.add('hidden');
   }
-};
 
-submitPressed();
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeProject();
+    }
+  });
+};
