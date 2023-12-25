@@ -1,13 +1,13 @@
 import { Todo } from './todo';
+import { Project } from './project';
+import { projectArray, currentProject } from './createProject'; // Import projectArray and currentProject
 
-export function submitTasks() {
-  let tasksArr = [];
+export const submitTasks = () => {
   const submitTask = document.querySelector('#submit-task');
-  let inputs = document.querySelectorAll('input');
-  let textArea = document.querySelector('textarea');
 
   submitTask.addEventListener('click', (e) => {
     e.preventDefault();
+
     const title = document.querySelector('#title').value;
     const desc = document.querySelector('#description').value;
     const dueDate = document.querySelector('#date').value;
@@ -15,17 +15,29 @@ export function submitTasks() {
       'input[type="radio"]:checked'
     ).value;
 
-    const task = new Todo(title, desc, dueDate, priority);
-    tasksArr.push(task);
-    console.log(tasksArr);
+    // Check if a project is selected
+    if (currentProject) {
+      const task = new Todo(title, desc, dueDate, priority);
 
-    document.querySelector('.task-popup').classList.add('hidden');
-    resetForm(inputs, textArea);
-    resetRadioButtons('input[type="radio"]');
+      currentProject.addTodo(task);
+      console.log(currentProject);
+
+      localStorage.setItem('projectArray', JSON.stringify(projectArray));
+
+      document.querySelector('.task-popup').classList.add('hidden');
+      resetForm(); // Reset the form
+      resetRadioButtons('input[type="radio"]');
+    } else {
+      // Inform the user that they need to select a project
+      alert('Please select a project before adding a task.');
+    }
   });
-}
+};
 
-function resetForm(inputs, textArea) {
+// Reset modal form
+export function resetForm() {
+  const inputs = document.querySelectorAll('input');
+  const textArea = document.querySelector('textarea');
   inputs.forEach((input) => {
     if (input.type !== 'radio') {
       input.value = '';
@@ -34,7 +46,7 @@ function resetForm(inputs, textArea) {
   textArea.value = '';
 }
 
-// resets radio button so none are checked
+// Resets radio button so none are checked
 function resetRadioButtons(selector) {
   const radioButtons = document.querySelectorAll(selector);
   radioButtons.forEach((radio) => {

@@ -16,7 +16,9 @@
 
 import { createTodoModal, createProjectModal } from './modal';
 import { projectArray, submitProjects } from './createProject';
+import { submitTasks } from './createTodo';
 
 createTodoModal();
 createProjectModal();
 submitProjects();
+submitTasks();

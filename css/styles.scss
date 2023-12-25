@@ -100,6 +100,15 @@ nav {
             align-items: center;
             justify-content: space-between;
 
+            &:hover {
+                background-color: #ccc7e4;
+            }
+    
+            &:active, &:focus {
+                background-color: #ccc7e4;
+                font-weight: 500;
+            }
+
             span {
                 font-size: 1rem;
             }
@@ -121,7 +130,7 @@ nav {
         margin-right: 10px;
     }
 
-    button {
+    .button{
         border: 0;
         width: 250px;
         padding: 10px;
@@ -140,6 +149,15 @@ nav {
             background-color: #ccc7e4;
             font-weight: 500;
         }
+    }
+
+    .current-project:hover {
+        background-color: #ccc7e4;
+    }
+
+    .current-project:active, .current-project:focus {
+        background-color: #ccc7e4;
+        font-weight: 500;
     }
 }
 
