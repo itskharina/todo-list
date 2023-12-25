@@ -1,25 +1,67 @@
-import { from } from 'webpack-sources/lib/compatsource';
+import { Project } from './project';
+// import { Todo } from './todo';
 
-export const createProjectModal = () => {
-  const addProject = document.querySelector('.add-project');
-  addProject.addEventListener('click', openProject);
+export const projectArray = [];
 
-  const removeProject = document.querySelector('.remove-project');
-  removeProject.addEventListener('click', closeProject);
+export const submitProjects = () => {
+  const submitProjectButton = document.querySelector('#submit-project');
+  let inputs = document.querySelectorAll('input');
 
-  const modal = document.querySelector('.project-popup');
+  submitProjectButton.addEventListener('click', (e) => {
+    e.preventDefault();
 
-  function openProject() {
-    modal.classList.remove('hidden');
-  }
+    const projectName = document.querySelector('#name').value;
 
-  function closeProject() {
-    modal.classList.add('hidden');
-  }
+    let project = new Project(projectName);
+    projectArray.push(project);
+    console.log(project);
+    console.log(projectArray);
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeProject();
-    }
+    document.querySelector('.project-popup').classList.add('hidden');
+    inputs.forEach((input) => {
+      input.value = '';
+    });
+
+    renderProject();
   });
+};
+
+const renderProject = () => {
+  const projectUL = document.querySelector('ul');
+  projectUL.innerHTML = '';
+
+  projectArray.forEach((project, index) => {
+    const projectLI = document.createElement('li');
+    const projectButton = document.createElement('button');
+
+    const div = document.createElement('div');
+    div.classList.add('icon-name');
+
+    const icon = document.createElement('i');
+    icon.classList.add('fa-solid', 'fa-list-ul');
+
+    const bin = document.createElement('i');
+    bin.classList.add('fa-solid', 'fa-trash-can');
+    bin.dataset.index = index; // Add a data attribute to store the index
+
+    const span = document.createElement('span');
+    span.innerHTML = `${project.name}`;
+
+    div.append(icon, span);
+    projectButton.append(div, bin);
+    projectLI.append(projectButton);
+    projectUL.append(projectLI);
+  });
+
+  const deleteBtns = document.querySelectorAll('.fa-trash-can');
+  deleteBtns.forEach((btn) => {
+    btn.addEventListener('click', deleteProject);
+  });
+};
+
+const deleteProject = (e) => {
+  const index = e.target.dataset.index;
+  projectArray.splice(index, 1);
+  // console.log(projectArray);
+  renderProject();
 };

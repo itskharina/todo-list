@@ -1,14 +1,14 @@
 export class Project {
   constructor(name) {
     this.name = name;
-    this.todoListProject = []; // change this ofc
+    this.taskList = [];
   }
 
   addTodo(todo) {
-    this.todoListProject.push(todo);
+    this.taskList.push(todo);
   }
 
   removeTodo(index) {
-    this.todoList.splice(index, 1);
+    this.taskList.splice(index, 1);
   }
 }

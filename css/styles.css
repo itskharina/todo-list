@@ -8,9 +8,9 @@
 .container {
   display: grid;
   grid-template-columns: 1fr 6fr;
-  grid-template-rows: 1fr 6fr;
+  grid-template-rows: 1fr 7fr;
   grid-template-areas: "header header header" "nav main main" "nav main main" "nav main main";
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .header {
@@ -56,28 +56,51 @@ nav .buttons, nav .projects {
 nav .projects {
   margin-top: 40px;
 }
+nav ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+nav ul button {
+  padding-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav ul button span, nav ul button i {
+  font-size: 1rem;
+}
+nav ul button i {
+  margin-left: 25px;
+}
+nav ul button .icon-task {
+  display: flex;
+  align-items: center;
+}
 nav .fa-solid {
   margin-right: 10px;
 }
 nav button {
   border: 0;
-  height: 2.7rem;
   width: 250px;
   padding: 10px;
   border-radius: 8px;
   color: #59556d;
-  font-size: 16px;
   text-align: start;
   cursor: pointer;
   background-color: #d1cde6;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 nav button:hover {
   background-color: #ccc7e4;
 }
 nav button:active, nav button:focus {
   background-color: #ccc7e4;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .main {

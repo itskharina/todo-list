@@ -39,13 +39,13 @@ $fourthColour: #59556d;
 .container {
     display: grid;
     grid-template-columns: 1fr 6fr;
-    grid-template-rows: 1fr 6fr;
+    grid-template-rows: 1fr 7fr;
     grid-template-areas: 
     "header header header"
     "nav main main"
     "nav main main"
     "nav main main";
-    height: 100vh;
+    min-height: 100vh;
 }
 
 //HEADER
@@ -88,24 +88,49 @@ nav {
         margin-top: 40px;
     }
 
+    ul {
+        list-style-type: none;
+        @include flex(column);
+        gap: 10px;
+        margin-bottom: 10px;
+
+        button {
+            padding-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            span {
+                font-size: 1rem;
+            }
+
+            i {
+                @extend span;
+                margin-left: 25px;
+            }
+
+            .icon-task {
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+    
+
     .fa-solid {
         margin-right: 10px;
     }
 
     button {
         border: 0;
-        height: 2.7rem;
         width: 250px;
         padding: 10px;
         border-radius: 8px;
         color: $fourthColour;
-        font-size: 16px;
         text-align: start;
         cursor: pointer;
         background-color: $secondColour;
-        font-size: 1.1rem;
-
-        // try and fix button bold text
+        font-size: 1.2rem;
 
         &:hover {
             background-color: #ccc7e4;
@@ -113,7 +138,7 @@ nav {
 
         &:active, &:focus {
             background-color: #ccc7e4;
-            font-weight: 600;
+            font-weight: 500;
         }
     }
 }

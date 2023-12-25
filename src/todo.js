@@ -5,4 +5,17 @@ export class Todo {
     this.dueDate = dueDate;
     this.priority = priority;
   }
+
+  // setTitle(title) {
+  //   this.title = title;
+  // }
+  // setDesc(desc) {
+  //   this.desc = desc;
+  // }
+  // setdueDate(dueDate) {
+  //   this.dueDate = dueDate;
+  // }
+  // setPriority(priority) {
+  //   this.priority = priority;
+  // }
 }
