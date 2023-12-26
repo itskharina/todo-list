@@ -22,19 +22,20 @@
                 <button class="week button"><i class="fa-solid fa-calendar-week" aria-hidden="true"></i>This Week</button>
             </div>
             <div class="projects">
-                <h2>Projects</h2>
+                <h2 class="project-title-sidebar">Projects</h2>
                 <button class="add-project button"><i class="fa-solid fa-plus" aria-hidden="true"></i>Create new project</button>
                 <ul>
                 </ul>
             </div>
         </nav>
         <main class="main">
+            <h2 class="project-title"></h2>
             <div class="task-popup hidden">
                 <form class="form">
                     <div class="tasks-container">
                         <div class="top">
                             <h3>Add your task!</h3>
-                            <button class="remove-task">X</button>
+                            <button type="button" class="remove-task">X</button>
                         </div>
                         <div class="tasks">
                             <label for="title">Title</label>
@@ -72,7 +73,7 @@
                     <div class="project-container">
                         <div class="top">
                             <h3>Add your project!</h3>
-                            <button class="remove-project">X</button>
+                            <button type="button" class="remove-project">X</button>
                         </div>
                         <div class="project-input">
                             <label for="name">Name</label>
