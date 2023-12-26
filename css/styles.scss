@@ -88,6 +88,18 @@ nav {
         margin-top: 40px;
     }
 
+    .project-title-sidebar::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -6px;
+        width: 130px;
+        height: 2.5px;
+        background: $fourthColour;
+        border-radius: 10px;
+        transform:translateX(-65px);
+    }
+
     ul {
         list-style-type: none;
         @include flex(column);
@@ -150,15 +162,6 @@ nav {
             font-weight: 500;
         }
     }
-
-    .current-project:hover {
-        background-color: #ccc7e4;
-    }
-
-    .current-project:active, .current-project:focus {
-        background-color: #ccc7e4;
-        font-weight: 500;
-    }
 }
 
 //MAIN
@@ -183,6 +186,27 @@ nav {
 .top {
     @include flex(row);
     gap: 7rem;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.6rem;
+    color: $fourthColour;
+    position: relative;
+
+    &.underline:before {
+        opacity: 1;
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -6px;
+        width: 130px;
+        height: 2.5px;
+        background: $fourthColour;
+        border-radius: 10px;
+        transform:translateX(-65px);
+    }
 }
 
 h3 {

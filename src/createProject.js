@@ -34,15 +34,20 @@ const renderProjects = () => {
     projectLI.append(projectButton);
     projectUL.append(projectLI);
 
-    // Add click event listener to project button
+    // add click event listener to project button
     projectButton.addEventListener('click', () => {
       setCurrentProject(project);
-      renderProjects(); // Re-render projects to update the 'current-project' class
+      renderProjects();
     });
 
-    // Highlight the current project in the sidebar
     if (currentProject && project.name === currentProject.name) {
       projectButton.classList.add('current-project');
+
+      // setting project name as the title in the UI
+      const projectTitle = document.querySelector('.project-title');
+      projectTitle.textContent = currentProject.name;
+      // adding underline under the project title
+      projectTitle.classList.add('underline');
     }
   });
 
@@ -62,8 +67,8 @@ export const submitProjects = () => {
     const project = new Project(projectName);
 
     projectArray.push(project);
-    currentProject = project; // Update the currentProject to the new project
-    console.log(project);
+    currentProject = project;
+    // console.log(project);
 
     localStorage.setItem('projectArray', JSON.stringify(projectArray));
 
@@ -85,6 +90,10 @@ const deleteProject = (e) => {
   }
 
   localStorage.setItem('projectArray', JSON.stringify(projectArray));
+
+  const projectTitle = document.querySelector('.project-title');
+  projectTitle.textContent = '';
+  projectTitle.classList.remove('underline');
   renderProjects();
 };
 

@@ -1,6 +1,6 @@
 import { Todo } from './todo';
 import { Project } from './project';
-import { projectArray, currentProject } from './createProject'; // Import projectArray and currentProject
+import { projectArray, currentProject } from './createProject';
 
 export const submitTasks = () => {
   const submitTask = document.querySelector('#submit-task');

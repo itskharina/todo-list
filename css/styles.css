@@ -56,6 +56,17 @@ nav .buttons, nav .projects {
 nav .projects {
   margin-top: 40px;
 }
+nav .project-title-sidebar::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 130px;
+  height: 2.5px;
+  background: #59556d;
+  border-radius: 10px;
+  transform: translateX(-65px);
+}
 nav ul {
   list-style-type: none;
   display: flex;
@@ -109,13 +120,6 @@ nav .button:active, nav .button:focus {
   background-color: #ccc7e4;
   font-weight: 500;
 }
-nav .current-project:hover {
-  background-color: #ccc7e4;
-}
-nav .current-project:active, nav .current-project:focus {
-  background-color: #ccc7e4;
-  font-weight: 500;
-}
 
 .main {
   grid-area: main;
@@ -141,6 +145,26 @@ nav .current-project:active, nav .current-project:focus {
   align-items: center;
   justify-content: center;
   gap: 7rem;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.6rem;
+  color: #59556d;
+  position: relative;
+}
+h2.underline:before {
+  opacity: 1;
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 130px;
+  height: 2.5px;
+  background: #59556d;
+  border-radius: 10px;
+  transform: translateX(-65px);
 }
 
 h3 {
