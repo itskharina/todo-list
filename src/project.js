@@ -7,8 +7,8 @@ export class Project {
   addTodo(todo) {
     this.taskList.push(todo);
   }
-
-  removeTodo(index) {
-    this.taskList.splice(index, 1);
-  }
 }
+
+// removeTodo(index) {
+//   this.taskList.splice(index, 1);
+// }
