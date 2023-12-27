@@ -1,5 +1,5 @@
 import { Project } from './project';
-import { resetForm } from './createTodo';
+import { resetForm, renderTodos } from './createTodo';
 
 // fix the button bold text thing
 
@@ -16,8 +16,8 @@ const renderProjects = () => {
     const projectButton = document.createElement('button');
     projectButton.classList.add('project-btn', 'button');
 
-    const div = document.createElement('div');
-    div.classList.add('icon-name');
+    const divProject = document.createElement('div');
+    divProject.classList.add('icon-name');
 
     const icon = document.createElement('i');
     icon.classList.add('fa-solid', 'fa-list-ul');
@@ -29,15 +29,16 @@ const renderProjects = () => {
     const span = document.createElement('span');
     span.innerHTML = `${project.name}`;
 
-    div.append(icon, span);
-    projectButton.append(div, bin);
+    divProject.append(icon, span);
+    projectButton.append(divProject, bin);
     projectLI.append(projectButton);
     projectUL.append(projectLI);
 
-    // add click event listener to project button
+    // Add click event listener to project button on sidebar
     projectButton.addEventListener('click', () => {
       setCurrentProject(project);
       renderProjects();
+      renderTodos();
     });
 
     if (currentProject && project.name === currentProject.name) {
@@ -59,16 +60,14 @@ const renderProjects = () => {
 
 export const submitProjects = () => {
   const submitProjectButton = document.querySelector('#submit-project');
+  const projectNameInput = document.querySelector('#name');
 
-  submitProjectButton.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    const projectName = document.querySelector('#name').value;
+  const submitProjectForm = () => {
+    const projectName = projectNameInput.value;
     const project = new Project(projectName);
 
     projectArray.push(project);
     currentProject = project;
-    // console.log(project);
 
     localStorage.setItem('projectArray', JSON.stringify(projectArray));
 
@@ -76,6 +75,19 @@ export const submitProjects = () => {
     renderProjects();
     resetForm();
     console.log(projectArray);
+  };
+
+  submitProjectButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    submitProjectForm();
+  });
+
+  // Allowing form submission when enter key is pressed
+  projectNameInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      submitProjectForm();
+    }
   });
 };
 
@@ -89,6 +101,8 @@ const deleteProject = (e) => {
     localStorage.removeItem('currentProject');
   }
 
+  // need to make it so the task deletes alongside
+
   localStorage.setItem('projectArray', JSON.stringify(projectArray));
 
   const projectTitle = document.querySelector('.project-title');
@@ -97,6 +111,7 @@ const deleteProject = (e) => {
   renderProjects();
 };
 
+// Sets the selected project in sidebar as current project
 const setCurrentProject = (project) => {
   currentProject = project;
   localStorage.setItem('currentProject', JSON.stringify(currentProject));
