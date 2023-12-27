@@ -314,4 +314,27 @@ input #date, textarea #date {
 }
 .tasks-container .remove-task:active {
   transform: translateY(4px);
+}
+
+.task-container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.div-tasks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  border: 1px solid #59556d;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.right-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }/*# sourceMappingURL=styles.css.map */

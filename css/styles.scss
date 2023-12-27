@@ -346,5 +346,25 @@ input, textarea {
         color: $fourthColour;
         font-weight: 500;
         cursor: pointer;
-    }
+    } 
+}
+
+.task-container {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.div-tasks {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    border: 1px solid $fourthColour;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.right-container {
+    @include flex(row);
+    gap: 20px;
 }
