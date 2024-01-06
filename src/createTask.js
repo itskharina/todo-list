@@ -33,14 +33,13 @@ export const renderTasks = () => {
       divPriority.classList.add('div-priority');
 
       if (task.priority === 'high') {
-        divPriority.innerHTML =
-          "<img src='./images/redflag.png' alt='red flag'>";
+        divPriority.innerHTML = "<img src='images/redflag.png' alt='red flag'>";
       } else if (task.priority === 'medium') {
         divPriority.innerHTML =
-          "<img src='./images/orangeflag.png' alt='orange flag'>";
+          "<img src='images/orangeflag.png' alt='orange flag'>";
       } else {
         divPriority.innerHTML =
-          "<img src='./images/greenflag.png' alt='green flag'>";
+          "<img src='images/greenflag.png' alt='green flag'>";
       }
 
       const rightContainer = document.createElement('div');
