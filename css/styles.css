@@ -89,11 +89,8 @@ nav ul button:active, nav ul button:focus {
   background-color: #ccc7e4;
   font-weight: 500;
 }
-nav ul button span, nav ul button i {
+nav ul button span {
   font-size: 1rem;
-}
-nav ul button i {
-  margin-left: 25px;
 }
 nav ul button .icon-task {
   display: flex;
@@ -321,20 +318,48 @@ input #date, textarea #date {
   margin: 0 auto;
 }
 
-.div-tasks {
+.task-with-info {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #59556d;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 5px 10px;
+}
+.task-with-info p {
+  padding: 10px 5px;
+}
+.task-with-info .div-tasks {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 20px;
-  border: 1px solid #59556d;
   padding: 10px;
   border-radius: 10px;
 }
-
-.right-container {
+.task-with-info .div-tasks .right-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 20px;
+}
+.task-with-info .div-tasks .left-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.task-with-info .div-tasks .left-container #checkbox {
+  transform: scale(1.4);
+}
+.task-with-info .div-tasks .left-container .div-title {
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.div-priority img {
+  width: 20px;
+  display: flex;
 }/*# sourceMappingURL=styles.css.map */

@@ -1,5 +1,5 @@
 import { Project } from './project';
-import { resetForm, renderTodos } from './createTodo';
+import { resetForm, renderTasks } from './createTask';
 
 // fix the button bold text thing
 
@@ -38,7 +38,7 @@ const renderProjects = () => {
     projectButton.addEventListener('click', () => {
       setCurrentProject(project);
       renderProjects();
-      renderTodos();
+      renderTasks();
     });
 
     if (currentProject && project.name === currentProject.name) {
@@ -93,7 +93,10 @@ export const submitProjects = () => {
 
 const deleteProject = (e) => {
   const index = e.target.dataset.index;
+  const deletedProject = projectArray[index];
+
   projectArray.splice(index, 1);
+  deletedProject.taskList = [];
 
   // Check if the deleted project is the current project
   if (currentProject && index === currentProject.name) {
@@ -101,14 +104,13 @@ const deleteProject = (e) => {
     localStorage.removeItem('currentProject');
   }
 
-  // need to make it so the task deletes alongside
-
   localStorage.setItem('projectArray', JSON.stringify(projectArray));
 
   const projectTitle = document.querySelector('.project-title');
   projectTitle.textContent = '';
   projectTitle.classList.remove('underline');
   renderProjects();
+  renderTasks();
 };
 
 // Sets the selected project in sidebar as current project

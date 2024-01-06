@@ -4,11 +4,7 @@ export class Project {
     this.taskList = [];
   }
 
-  addTodo(todo) {
-    this.taskList.push(todo);
+  addTask(task) {
+    this.taskList.push(task);
   }
 }
-
-// removeTodo(index) {
-//   this.taskList.splice(index, 1);
-// }
