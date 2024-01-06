@@ -64,17 +64,23 @@ export const submitProjects = () => {
 
   const submitProjectForm = () => {
     const projectName = projectNameInput.value;
-    const project = new Project(projectName);
 
-    projectArray.push(project);
-    currentProject = project;
+    // Checks to see if project already exists
+    if (projectArray.some((project) => project.name === projectName)) {
+      alert('You already have a project with this name!');
+      return;
+    } else {
+      const project = new Project(projectName);
 
-    localStorage.setItem('projectArray', JSON.stringify(projectArray));
+      projectArray.push(project);
+      currentProject = project;
 
-    document.querySelector('.project-popup').classList.add('hidden');
-    renderProjects();
-    resetForm();
-    console.log(projectArray);
+      localStorage.setItem('projectArray', JSON.stringify(projectArray));
+      document.querySelector('.project-popup').classList.add('hidden');
+      renderProjects();
+      resetForm();
+      console.log(projectArray);
+    }
   };
 
   submitProjectButton.addEventListener('click', (e) => {
