@@ -34,13 +34,13 @@ export const renderTasks = () => {
 
       if (task.priority === 'high') {
         divPriority.innerHTML =
-          "<img src='../dist/images/redflag.png' alt='red flag'>";
+          "<img src='./images/redflag.png' alt='red flag'>";
       } else if (task.priority === 'medium') {
         divPriority.innerHTML =
-          "<img src='../dist/images/orangeflag.png' alt='orange flag'>";
+          "<img src='./images/orangeflag.png' alt='orange flag'>";
       } else {
         divPriority.innerHTML =
-          "<img src='../dist/images/greenflag.png' alt='green flag'>";
+          "<img src='./images/greenflag.png' alt='green flag'>";
       }
 
       const rightContainer = document.createElement('div');
