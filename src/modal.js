@@ -1,3 +1,5 @@
+import { resetForm } from './createTask';
+
 export const createTodoModal = () => {
   const addTask = document.querySelector('.add-task');
   addTask.addEventListener('click', openTask);
@@ -12,6 +14,7 @@ export const createTodoModal = () => {
   }
 
   function closeTask() {
+    resetForm();
     modal.classList.add('hidden');
   }
 
@@ -36,6 +39,7 @@ export const createProjectModal = () => {
   }
 
   function closeProject() {
+    resetForm();
     modal.classList.add('hidden');
   }
 

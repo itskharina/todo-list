@@ -6,7 +6,7 @@ import { resetForm, renderTasks } from './createTask';
 export const projectArray = [];
 export let currentProject = null;
 
-const renderProjects = () => {
+export const renderProjects = () => {
   const projectUL = document.querySelector('ul');
   projectUL.innerHTML = '';
 
@@ -79,7 +79,7 @@ export const submitProjects = () => {
       document.querySelector('.project-popup').classList.add('hidden');
       renderProjects();
       resetForm();
-      console.log(projectArray);
+      // console.log(projectArray);
     }
   };
 
