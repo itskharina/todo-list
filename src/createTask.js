@@ -2,6 +2,9 @@ import { Task } from './task';
 import { Project } from './project';
 import { projectArray, currentProject } from './createProject';
 import { format } from 'date-fns';
+import { initializeTodoModal } from './modal';
+
+let editIndex;
 
 export const renderTasks = () => {
   if (currentProject) {
@@ -13,6 +16,8 @@ export const renderTasks = () => {
       const checkbox = document.createElement('input');
       checkbox.setAttribute('type', 'checkbox');
       checkbox.setAttribute('id', 'checkbox');
+      checkbox.classList.add('checkbox');
+      checkbox.dataset.index = index;
 
       const taskAndInfo = document.createElement('div');
       taskAndInfo.classList.add('task-with-info');
@@ -54,6 +59,7 @@ export const renderTasks = () => {
 
       const editButton = document.createElement('i');
       editButton.classList.add('fa-solid', 'fa-pen-to-square');
+      editButton.dataset.index = index;
 
       const bin = document.createElement('i');
       bin.classList.add('fa-solid', 'fa-trash-can');
@@ -75,6 +81,85 @@ export const renderTasks = () => {
     infoBtns.forEach((info) => {
       info.addEventListener('click', showInfo);
     });
+
+    const checkbox = document.querySelectorAll('input[type="checkbox"]');
+    checkbox.forEach((check) => {
+      check.addEventListener('change', completedTasks);
+    });
+
+    const editBtns = document.querySelectorAll('.fa-pen-to-square');
+    editBtns.forEach((edit) => {
+      edit.addEventListener('click', editTasks);
+    });
+  }
+};
+
+export const submitTasks = () => {
+  const submitTask = document.querySelector('#submit-task');
+  let editCurrentTask;
+
+  const submitTaskForm = (e) => {
+    const title = document.querySelector('#title').value;
+    const desc = document.querySelector('#description').value;
+    const dueDate = document.querySelector('#date').value;
+    const priority = document.querySelector(
+      'input[type="radio"]:checked'
+    ).value;
+
+    if (currentProject && e.target.classList.contains('add')) {
+      const task = new Task(title, desc, dueDate, priority);
+      currentProject.addTask(task);
+      localStorage.setItem('projectArray', JSON.stringify(projectArray));
+    } else if (currentProject && e.target.classList.contains('edit')) {
+      editCurrentTask = currentProject.taskList[editIndex];
+      editCurrentTask.title = title;
+      editCurrentTask.desc = desc;
+      editCurrentTask.dueDate = dueDate;
+      editCurrentTask.priority = priority;
+
+      localStorage.setItem('projectArray', JSON.stringify(projectArray));
+    } else {
+      alert('You need to select a project first!');
+    }
+  };
+
+  submitTask.addEventListener('click', (e) => {
+    e.preventDefault();
+    submitTaskForm(e);
+    resetForm();
+    const modal = document.querySelector('.task-popup');
+    modal.classList.add('hidden');
+    renderTasks();
+  });
+
+  // Allowing form submission when enter key is pressed
+  dueDate.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      submitProjectForm();
+    }
+  });
+};
+
+const editTasks = (e) => {
+  editIndex = e.target.dataset.index;
+  // allows us to get the createTodoModal(e) function that was returned
+  const editTodoModal = initializeTodoModal();
+  // calling the createTodoModal() function now that it has been returned and stored in editTodoModal
+  editTodoModal(e);
+};
+
+// adding a line through title when task is complete
+const completedTasks = (e) => {
+  const divTitle = e.target.closest('.div-tasks').querySelector('.div-title');
+
+  if (e.target.checked) {
+    console.log('checked');
+    divTitle.style.color = '#5e5f61';
+    divTitle.style.textDecoration = 'line-through';
+  } else {
+    divTitle.style.textDecoration = 'none';
+    divTitle.style.color = 'black';
   }
 };
 
@@ -100,7 +185,6 @@ const showInfo = (e) => {
     existingInfoContainer.remove();
   } else {
     // If it doesn't exist, create and append the info container
-
     const infoContainer = document.createElement('div');
     infoContainer.classList.add('info-container');
 
@@ -116,55 +200,10 @@ const showInfo = (e) => {
   document.addEventListener('click', closeInfoDropdown);
 };
 
-// Closes all dropdowns when user clicks the screen
 const closeInfoDropdown = () => {
   const infoContainers = document.querySelectorAll('.info-container');
   infoContainers.forEach((infoContainer) => {
     infoContainer.remove();
-  });
-};
-
-export const submitTasks = () => {
-  const submitTask = document.querySelector('#submit-task');
-
-  const submitTaskForm = () => {
-    const title = document.querySelector('#title').value;
-    const desc = document.querySelector('#description').value;
-    const dueDate = document.querySelector('#date').value;
-    const priority = document.querySelector(
-      'input[type="radio"]:checked'
-    ).value;
-
-    // Check if a project is selected
-    if (currentProject) {
-      const task = new Task(title, desc, dueDate, priority);
-
-      currentProject.addTask(task);
-      console.log(currentProject);
-
-      localStorage.setItem('projectArray', JSON.stringify(projectArray));
-
-      document.querySelector('.task-popup').classList.add('hidden');
-      resetForm(); // Reset the form
-      resetRadioButtons('input[type="radio"]');
-    } else {
-      // Inform the user that they need to select a project
-      alert('Please select a project before adding a task.');
-    }
-  };
-
-  submitTask.addEventListener('click', (e) => {
-    e.preventDefault();
-    submitTaskForm();
-    renderTasks();
-  });
-
-  // Allowing form submission when enter key is pressed
-  dueDate.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      submitProjectForm();
-    }
   });
 };
 
@@ -181,7 +220,7 @@ export function resetForm() {
 }
 
 // Resets radio button so none are checked
-function resetRadioButtons(selector) {
+export function resetRadioButtons(selector) {
   const radioButtons = document.querySelectorAll(selector);
   radioButtons.forEach((radio) => {
     radio.checked = false;
