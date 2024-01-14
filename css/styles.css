@@ -351,7 +351,7 @@ input #date, textarea #date {
   justify-content: center;
   gap: 20px;
 }
-.task-with-info .div-tasks .left-container #checkbox {
+.task-with-info .div-tasks .left-container .checkbox {
   transform: scale(1.4);
 }
 .task-with-info .div-tasks .left-container .div-title {

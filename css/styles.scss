@@ -379,7 +379,7 @@ input, textarea {
             @include flex(row);
             gap: 20px;
         
-            #checkbox {
+            .checkbox {
                 transform: scale(1.4);
             }
 
