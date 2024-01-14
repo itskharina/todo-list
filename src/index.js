@@ -18,16 +18,17 @@ const todayBtn = document.querySelector('.today');
 const weekBtn = document.querySelector('.week');
 const allBtn = document.querySelector('.all');
 
+const projectTitle = document.querySelector('.project-title');
+
 todayBtn.addEventListener('click', today);
 weekBtn.addEventListener('click', week);
-allBtn.addEventListener('click', all);
+allBtn.addEventListener('click', () => all(projectArray));
 
-const projectArrayStorage = JSON.parse(localStorage.getItem('projectArray'));
-const currentProjectStorage = JSON.parse(
-  localStorage.getItem('currentProject')
+export const projectArrayStorage = JSON.parse(
+  localStorage.getItem('projectArray')
 );
+console.log('storage', projectArrayStorage);
 
-// Check if there is stored project data
 if (projectArrayStorage) {
   projectArrayStorage.forEach((projectData) => {
     const project = new Project(projectData.name);
@@ -44,19 +45,12 @@ if (projectArrayStorage) {
         project.addTask(task);
       });
     }
-
     projectArray.push(project);
+    all(projectArrayStorage);
   });
 }
 
-// if (currentProjectStorage) {
-//   const currentProjectIndex = projectArray.findIndex(
-//     (project) => project.name === currentProjectStorage.name
-//   );
-//   currentProject = projectArray[currentProjectIndex];
-// }
 renderProjects();
-renderTasks();
 
 initializeTodoModal();
 createProjectModal();

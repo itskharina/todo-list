@@ -47,8 +47,8 @@ export const renderProjects = () => {
       const projectTitle = document.querySelector('.project-title');
       projectTitle.textContent = currentProject.name;
 
-      // Adding underline under the project title
-      projectTitle.classList.add('underline');
+      // // Adding underline under the project title
+      // projectTitle.classList.add('underline');
     }
   });
 

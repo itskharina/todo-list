@@ -1,7 +1,6 @@
 import { isToday, isThisWeek } from 'date-fns';
 import { projectArray } from './createProject';
 import { renderTasks } from './createTask';
-
 const projectTitle = document.querySelector('.project-title');
 
 export const today = () => {
@@ -40,10 +39,10 @@ export const week = () => {
   renderTasks(weekTasks);
 };
 
-export const all = () => {
+export const all = (arr) => {
   let allTasks = [];
 
-  projectArray.forEach((project) => {
+  arr.forEach((project) => {
     allTasks.push(...project.taskList);
   });
 

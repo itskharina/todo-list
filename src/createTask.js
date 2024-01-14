@@ -2,6 +2,7 @@ import { Task } from './task';
 import { projectArray, currentProject } from './createProject';
 import { format } from 'date-fns';
 import { initializeTodoModal } from './modal';
+import { projectArrayStorage } from '.';
 
 let editIndex;
 const modal = document.querySelector('.task-popup');
@@ -11,7 +12,7 @@ export const renderTasks = (tasks) => {
   const container = document.querySelector('.task-container');
   container.innerHTML = '';
 
-  if (currentProject) {
+  if (currentProject || projectArrayStorage) {
     tasks.forEach((task, index) => {
       const checkbox = document.createElement('input');
       checkbox.setAttribute('type', 'checkbox');
@@ -91,6 +92,8 @@ export const renderTasks = (tasks) => {
     editBtns.forEach((edit) => {
       edit.addEventListener('click', editTasks);
     });
+  } else {
+    console.error('tasks is not an array:', tasks);
   }
 
   if (tasks) {
