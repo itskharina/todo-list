@@ -1,11 +1,10 @@
 import { Project } from './project';
 import { resetForm, renderTasks } from './createTask';
 
-// fix the button bold text thing
-
 export const projectArray = [];
 export let currentProject = null;
 
+//
 export const renderProjects = () => {
   const projectUL = document.querySelector('ul');
   projectUL.innerHTML = '';
@@ -34,20 +33,21 @@ export const renderProjects = () => {
     projectLI.append(projectButton);
     projectUL.append(projectLI);
 
-    // Add click event listener to project button on sidebar
+    // Displays tasks within the project
     projectButton.addEventListener('click', () => {
       setCurrentProject(project);
       renderProjects();
-      renderTasks();
+      renderTasks(currentProject.taskList);
     });
 
     if (currentProject && project.name === currentProject.name) {
       projectButton.classList.add('current-project');
 
-      // setting project name as the title in the UI
+      // Setting project name as the title in the UI
       const projectTitle = document.querySelector('.project-title');
       projectTitle.textContent = currentProject.name;
-      // adding underline under the project title
+
+      // Adding underline under the project title
       projectTitle.classList.add('underline');
     }
   });
@@ -58,6 +58,7 @@ export const renderProjects = () => {
   });
 };
 
+// Creates a new project with user's input
 export const submitProjects = () => {
   const submitProjectButton = document.querySelector('#submit-project');
   const projectNameInput = document.querySelector('#name');
@@ -79,7 +80,6 @@ export const submitProjects = () => {
       document.querySelector('.project-popup').classList.add('hidden');
       renderProjects();
       resetForm();
-      // console.log(projectArray);
     }
   };
 
@@ -116,7 +116,7 @@ const deleteProject = (e) => {
   projectTitle.textContent = '';
   projectTitle.classList.remove('underline');
   renderProjects();
-  renderTasks();
+  renderTasks(currentProject.taskList);
 };
 
 // Sets the selected project in sidebar as current project

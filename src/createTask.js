@@ -1,21 +1,21 @@
 import { Task } from './task';
-import { Project } from './project';
 import { projectArray, currentProject } from './createProject';
 import { format } from 'date-fns';
 import { initializeTodoModal } from './modal';
 
 let editIndex;
+const modal = document.querySelector('.task-popup');
 
-export const renderTasks = () => {
+// Creates tasks container
+export const renderTasks = (tasks) => {
+  const container = document.querySelector('.task-container');
+  container.innerHTML = '';
+
   if (currentProject) {
-    const tasks = currentProject.taskList;
-    const container = document.querySelector('.task-container');
-    container.innerHTML = '';
-
     tasks.forEach((task, index) => {
       const checkbox = document.createElement('input');
       checkbox.setAttribute('type', 'checkbox');
-      checkbox.setAttribute('id', 'checkbox');
+      checkbox.setAttribute('class', 'checkbox');
       checkbox.classList.add('checkbox');
       checkbox.dataset.index = index;
 
@@ -92,34 +92,52 @@ export const renderTasks = () => {
       edit.addEventListener('click', editTasks);
     });
   }
+
+  if (tasks) {
+    tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  }
 };
 
+// Creates a new task with user's input
 export const submitTasks = () => {
   const submitTask = document.querySelector('#submit-task');
   let editCurrentTask;
 
   const submitTaskForm = (e) => {
+    const submitButton = document.querySelector('#submit-task');
     const title = document.querySelector('#title').value;
     const desc = document.querySelector('#description').value;
     const dueDate = document.querySelector('#date').value;
     const priority = document.querySelector(
       'input[type="radio"]:checked'
     ).value;
-
-    if (currentProject && e.target.classList.contains('add')) {
-      const task = new Task(title, desc, dueDate, priority);
-      currentProject.addTask(task);
-      localStorage.setItem('projectArray', JSON.stringify(projectArray));
-    } else if (currentProject && e.target.classList.contains('edit')) {
-      editCurrentTask = currentProject.taskList[editIndex];
-      editCurrentTask.title = title;
-      editCurrentTask.desc = desc;
-      editCurrentTask.dueDate = dueDate;
-      editCurrentTask.priority = priority;
-
-      localStorage.setItem('projectArray', JSON.stringify(projectArray));
+    // Checks to see if task already exists
+    if (
+      currentProject &&
+      submitButton.classList.contains('add') &&
+      currentProject.taskList.some((task) => task.title === title)
+    ) {
+      alert('A task with this title already exists in this project!');
+      return;
+    } else if (!title || !desc || !dueDate || !priority) {
+      alert("Please don't leave anything blank!");
     } else {
-      alert('You need to select a project first!');
+      if (currentProject && e.target.classList.contains('add')) {
+        const task = new Task(title, desc, dueDate, priority);
+        currentProject.addTask(task);
+
+        localStorage.setItem('projectArray', JSON.stringify(projectArray));
+      } else if (currentProject && e.target.classList.contains('edit')) {
+        editCurrentTask = currentProject.taskList[editIndex];
+        editCurrentTask.title = title;
+        editCurrentTask.desc = desc;
+        editCurrentTask.dueDate = dueDate;
+        editCurrentTask.priority = priority;
+
+        localStorage.setItem('projectArray', JSON.stringify(projectArray));
+      } else {
+        alert('You need to select a project first!');
+      }
     }
   };
 
@@ -127,34 +145,25 @@ export const submitTasks = () => {
     e.preventDefault();
     submitTaskForm(e);
     resetForm();
-    const modal = document.querySelector('.task-popup');
     modal.classList.add('hidden');
-    renderTasks();
-  });
-
-  // Allowing form submission when enter key is pressed
-  dueDate.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      submitProjectForm();
-    }
+    renderTasks(currentProject.taskList);
   });
 };
 
+// Allows user to edit task
 const editTasks = (e) => {
   editIndex = e.target.dataset.index;
-  // allows us to get the createTodoModal(e) function that was returned
+  // Gets the createTodoModal(e) function that was returned
   const editTodoModal = initializeTodoModal();
-  // calling the createTodoModal() function now that it has been returned and stored in editTodoModal
+  // Calling the createTodoModal() function now that it has been returned and stored in editTodoModal
   editTodoModal(e);
 };
 
-// adding a line through title when task is complete
+// Adding a line through title when task is complete
 const completedTasks = (e) => {
   const divTitle = e.target.closest('.div-tasks').querySelector('.div-title');
 
   if (e.target.checked) {
-    console.log('checked');
     divTitle.style.color = '#5e5f61';
     divTitle.style.textDecoration = 'line-through';
   } else {
@@ -166,25 +175,23 @@ const completedTasks = (e) => {
 const deleteTask = (e) => {
   const index = e.target.dataset.index;
   currentProject.taskList.splice(index, 1);
-  renderTasks();
+  renderTasks(currentProject.taskList);
 };
 
+// Shows description when info button is clicked
 const showInfo = (e) => {
   e.stopPropagation();
 
   const index = e.target.dataset.index;
   const task = currentProject.taskList[index];
 
-  // Check if the info container already exists for the current task
   const existingInfoContainer = e.target
     .closest('.task-with-info')
     .querySelector('.info-container');
 
   if (existingInfoContainer) {
-    // If it exists, remove it to hide the container
     existingInfoContainer.remove();
   } else {
-    // If it doesn't exist, create and append the info container
     const infoContainer = document.createElement('div');
     infoContainer.classList.add('info-container');
 
@@ -200,6 +207,7 @@ const showInfo = (e) => {
   document.addEventListener('click', closeInfoDropdown);
 };
 
+// Closes description dropdown when user clicks on screen
 const closeInfoDropdown = () => {
   const infoContainers = document.querySelectorAll('.info-container');
   infoContainers.forEach((infoContainer) => {
@@ -207,7 +215,7 @@ const closeInfoDropdown = () => {
   });
 };
 
-// Reset modal form
+// Resets modal form
 export function resetForm() {
   const inputs = document.querySelectorAll('input');
   const textArea = document.querySelector('textarea');

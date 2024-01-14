@@ -20,7 +20,11 @@ export function initializeTodoModal() {
     const dateInput = document.querySelector('#date');
     const priorityInput = document.querySelectorAll('input[type="radio"]');
 
-    if (e && e.target.classList.contains('fa-pen-to-square')) {
+    if (
+      currentProject &&
+      e &&
+      e.target.classList.contains('fa-pen-to-square')
+    ) {
       titleElement.textContent = 'Edit your task!';
       submitButton.textContent = 'Edit Task';
       submitButton.classList.add('edit');

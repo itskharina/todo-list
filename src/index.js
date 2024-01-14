@@ -1,5 +1,3 @@
-// todo - add form validation, edit tasks button and fix sidebar bold thing
-
 import {
   createTodoModal,
   initializeTodoModal,
@@ -14,6 +12,15 @@ import {
 import { renderTasks, submitTasks } from './createTask';
 import { Project } from './project';
 import { Task } from './task';
+import { today, week, all } from './date';
+
+const todayBtn = document.querySelector('.today');
+const weekBtn = document.querySelector('.week');
+const allBtn = document.querySelector('.all');
+
+todayBtn.addEventListener('click', today);
+weekBtn.addEventListener('click', week);
+allBtn.addEventListener('click', all);
 
 const projectArrayStorage = JSON.parse(localStorage.getItem('projectArray'));
 const currentProjectStorage = JSON.parse(
@@ -42,12 +49,12 @@ if (projectArrayStorage) {
   });
 }
 
-if (currentProjectStorage) {
-  const currentProjectIndex = projectArray.findIndex(
-    (project) => project.name === currentProjectStorage.name
-  );
-  currentProject = projectArray[currentProjectIndex];
-}
+// if (currentProjectStorage) {
+//   const currentProjectIndex = projectArray.findIndex(
+//     (project) => project.name === currentProjectStorage.name
+//   );
+//   currentProject = projectArray[currentProjectIndex];
+// }
 renderProjects();
 renderTasks();
 
