@@ -1,21 +1,21 @@
 import { isToday, isThisWeek } from 'date-fns';
 import { projectArray } from './createProject';
 import { renderTasks } from './createTask';
+import { setCurrentProject } from './createProject';
 const projectTitle = document.querySelector('.project-title');
 
 export const today = () => {
   let todayTasks = [];
 
-  // Loop through all projects in projectArray
   projectArray.forEach((project) => {
-    // Filter tasks that are due today for each project
-    const projectTodayTasks = project.taskList.filter((task) =>
-      isToday(new Date(task.dueDate))
-    );
-    // Spread syntax so that we don't get a nested array
-    todayTasks.push(...projectTodayTasks);
+    project.taskList.forEach((task) => {
+      if (isToday(new Date(task.dueDate))) {
+        todayTasks.push(task);
+      }
+    });
   });
 
+  setCurrentProject({ taskList: todayTasks });
   projectTitle.textContent = 'Tasks due today';
 
   renderTasks(todayTasks);
@@ -25,15 +25,16 @@ export const week = () => {
   let weekTasks = [];
 
   projectArray.forEach((project) => {
-    const projectWeekTasks = project.taskList.filter((week) =>
-      isThisWeek(new Date(week.dueDate), { weekStartsOn: 1 })
-    );
-
-    weekTasks.push(...projectWeekTasks);
+    project.taskList.forEach((task) => {
+      if (isThisWeek(new Date(task.dueDate))) {
+        weekTasks.push(task);
+      }
+    });
   });
 
   weekTasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
 
+  setCurrentProject({ taskList: weekTasks });
   projectTitle.textContent = 'Tasks due this week';
 
   renderTasks(weekTasks);
@@ -48,6 +49,7 @@ export const all = (arr) => {
 
   allTasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
 
+  setCurrentProject({ taskList: allTasks });
   projectTitle.textContent = 'All tasks';
 
   renderTasks(allTasks);

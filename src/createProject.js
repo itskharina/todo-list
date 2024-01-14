@@ -120,7 +120,7 @@ const deleteProject = (e) => {
 };
 
 // Sets the selected project in sidebar as current project
-const setCurrentProject = (project) => {
+export const setCurrentProject = (project) => {
   currentProject = project;
   localStorage.setItem('currentProject', JSON.stringify(currentProject));
 };
