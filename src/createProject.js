@@ -124,10 +124,3 @@ export const setCurrentProject = (project) => {
   currentProject = project;
   localStorage.setItem('currentProject', JSON.stringify(currentProject));
 };
-
-// document.addEventListener('click', function handleClick(e) {
-//   if (e.target.classList.contains('current-project')) {
-//     e.target.style.fontWeight = '600';
-//     e.target.style.backgroundColor = '#ccc7e4';
-//   }
-// });
