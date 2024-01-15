@@ -85,7 +85,7 @@ export const renderTasks = (tasks) => {
 
     const checkbox = document.querySelectorAll('input[type="checkbox"]');
     checkbox.forEach((check) => {
-      check.addEventListener('change', completedTasks);
+      check.addEventListener('change', deleteTask);
     });
 
     const editBtns = document.querySelectorAll('.fa-pen-to-square');
@@ -162,22 +162,23 @@ const editTasks = (e) => {
   editTodoModal(e);
 };
 
-// Adding a line through title when task is complete
-const completedTasks = (e) => {
-  const divTitle = e.target.closest('.div-tasks').querySelector('.div-title');
-
-  if (e.target.checked) {
-    divTitle.style.color = '#5e5f61';
-    divTitle.style.textDecoration = 'line-through';
-  } else {
-    divTitle.style.textDecoration = 'none';
-    divTitle.style.color = 'black';
-  }
-};
-
 const deleteTask = (e) => {
   const index = e.target.dataset.index;
+  const task = currentProject.taskList[index];
+
+  // Remove the task from the original project
+  const originalProject = projectArray.find((project) =>
+    project.taskList.includes(task)
+  );
+  if (originalProject) {
+    const taskIndexInOriginalProject = originalProject.taskList.indexOf(task);
+    originalProject.taskList.splice(taskIndexInOriginalProject, 1);
+  }
+
+  // Remove the task from the current project
   currentProject.taskList.splice(index, 1);
+
+  localStorage.setItem('projectArray', JSON.stringify(projectArray));
   renderTasks(currentProject.taskList);
 };
 

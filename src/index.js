@@ -3,12 +3,7 @@ import {
   initializeTodoModal,
   createProjectModal,
 } from './modal';
-import {
-  projectArray,
-  submitProjects,
-  renderProjects,
-  currentProject,
-} from './createProject';
+import { projectArray, submitProjects, renderProjects } from './createProject';
 import { renderTasks, submitTasks } from './createTask';
 import { Project } from './project';
 import { Task } from './task';
@@ -18,16 +13,13 @@ const todayBtn = document.querySelector('.today');
 const weekBtn = document.querySelector('.week');
 const allBtn = document.querySelector('.all');
 
-const projectTitle = document.querySelector('.project-title');
+export const projectArrayStorage = JSON.parse(
+  localStorage.getItem('projectArray')
+);
 
 todayBtn.addEventListener('click', today);
 weekBtn.addEventListener('click', week);
 allBtn.addEventListener('click', () => all(projectArray));
-
-export const projectArrayStorage = JSON.parse(
-  localStorage.getItem('projectArray')
-);
-console.log('storage', projectArrayStorage);
 
 if (projectArrayStorage) {
   projectArrayStorage.forEach((projectData) => {
