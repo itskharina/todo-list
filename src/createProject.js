@@ -1,5 +1,6 @@
 import { Project } from './project';
 import { resetForm, renderTasks } from './createTask';
+import { sortTasks } from './createTask';
 
 export const projectArray = [];
 export let currentProject = null;
@@ -37,6 +38,7 @@ export const renderProjects = () => {
     projectButton.addEventListener('click', () => {
       setCurrentProject(project);
       renderProjects();
+      sortTasks(currentProject.taskList);
       renderTasks(currentProject.taskList);
     });
 
@@ -46,9 +48,6 @@ export const renderProjects = () => {
       // Setting project name as the title in the UI
       const projectTitle = document.querySelector('.project-title');
       projectTitle.textContent = currentProject.name;
-
-      // // Adding underline under the project title
-      // projectTitle.classList.add('underline');
     }
   });
 

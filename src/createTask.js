@@ -95,7 +95,10 @@ export const renderTasks = (tasks) => {
   } else {
     console.error('tasks is not an array:', tasks);
   }
+  sortTasks(tasks);
+};
 
+export const sortTasks = (tasks) => {
   if (tasks) {
     tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
   }
